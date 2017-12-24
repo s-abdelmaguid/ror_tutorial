@@ -14,7 +14,7 @@ RSpec.describe "Article", type: :request do
 
       it "redirects to sign in page" do
         expect(response.status).to eq 302
-        flash_message = "you need to sign in or sign up before contunuing"
+        flash_message = "You need to sign in or sign up before continuing."
         expect(flash[:alert]).to eq flash_message
       end
     end
@@ -39,47 +39,8 @@ RSpec.describe "Article", type: :request do
         it "successfully edit article" do
           expect(response.status).to eq 200
         end
-    end
-
-
+     end
   end
-
-  describe 'GET /articles/:id/delete' do
-
-    context 'with non signed in user' do
-      before { get "/articles/#{@article.id}/delete"}
-
-      it "redirects to sign in page" do
-        expect(response.status).to eq 302
-        flash_message = "you need to sign in or sign up before contunuing"
-        expect(flash[:alert]).to eq flash_message
-      end
-    end
-
-    context 'with signed in user who is not owner' do
-      before do
-        login_as(@fred)
-        get "/articles/#{@article.id}/delete"
-      end
-      it "redirects to sign in page" do
-        expect(response.status).to eq 302
-        flash_message = "you can only delete your own articles"
-        expect(flash[:alert]).to eq flash_message
-      end
-    end
-
-    context "with sign in user as owner successful delete" do
-      before do
-        login_as(@john)
-        get "/articles/#{@article.id}/delete"
-      end
-        it "successfully deleted article" do
-          expect(response.status).to eq 200
-        end
-    end
-
-  end
-
 
   describe 'GET /articles/:id' do
     context 'with existing article' do
