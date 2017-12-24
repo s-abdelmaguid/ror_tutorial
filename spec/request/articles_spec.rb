@@ -29,7 +29,7 @@ RSpec.describe "Article", type: :request do
           flash_message = "you can only edit your own articles"
           expect(flash[:alert]).to eq flash_message
         end
-      end
+    end
 
     context "with sign in user as owner successful edit" do
       before do
